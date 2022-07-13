@@ -1,4 +1,4 @@
-package hu.modeldriven.cameo.action;
+package hu.modeldriven.cameo.unmarshall.action;
 
 import com.nomagic.actions.AMConfigurator;
 import com.nomagic.actions.ActionsManager;
