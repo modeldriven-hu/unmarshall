@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin
+        id="unmarshall"
+        name="Plugin to unmarshall properties"
+        version="1.0"
+        provider-name="modeldriven.hu"
+        class="hu.modeldriven.cameo.UnmarshallPlugin">
+
+    <requires>
+        <api version="1.2"/>
+    </requires>
+
+    <runtime>
+        <library name="unmarshall.jar"/>
+    </runtime>
+</plugin>
