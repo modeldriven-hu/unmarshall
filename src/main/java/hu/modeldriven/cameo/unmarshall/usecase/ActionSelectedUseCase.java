@@ -4,15 +4,14 @@ import hu.modeldriven.cameo.unmarshall.event.ActionDataAvailableEvent;
 import hu.modeldriven.cameo.unmarshall.event.ActionSelectedEvent;
 import hu.modeldriven.cameo.unmarshall.ui.UnmarshallDialog;
 import hu.modeldriven.core.eventbus.EventBus;
-import hu.modeldriven.core.usecase.UseCase;
+import hu.modeldriven.core.usecase.AbstractUseCase;
 
-public class ActionSelectedUseCase implements UseCase {
+public class ActionSelectedUseCase extends AbstractUseCase {
 
-    private final EventBus eventBus;
     private final UnmarshallDialog dialog;
 
     public ActionSelectedUseCase(EventBus eventBus) {
-        this.eventBus = eventBus;
+        super(eventBus);
         eventBus.subscribe(ActionSelectedEvent.class, this::onActionSelected);
         this.dialog = new UnmarshallDialog(null, eventBus);
     }
