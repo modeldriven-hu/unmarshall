@@ -1,22 +1,25 @@
 package hu.modeldriven.cameo.unmarshall.usecase;
 
-import com.nomagic.magicdraw.core.Application;
+import hu.modeldriven.cameo.unmarshall.event.ActionDataAvailableEvent;
 import hu.modeldriven.cameo.unmarshall.event.ActionSelectedEvent;
+import hu.modeldriven.cameo.unmarshall.ui.UnmarshallDialog;
 import hu.modeldriven.core.eventbus.EventBus;
 import hu.modeldriven.core.usecase.UseCase;
 
 public class ActionSelectedUseCase implements UseCase {
 
-    public ActionSelectedUseCase() {
-    }
+    private final EventBus eventBus;
+    private final UnmarshallDialog dialog;
 
-    @Override
-    public void register(EventBus eventBus) {
+    public ActionSelectedUseCase(EventBus eventBus) {
+        this.eventBus = eventBus;
         eventBus.subscribe(ActionSelectedEvent.class, this::onActionSelected);
+        this.dialog = new UnmarshallDialog(null, eventBus);
     }
 
     private void onActionSelected(ActionSelectedEvent event) {
-        Application.getInstance().getGUILog().showError("event = " + event);
+        this.dialog.setVisible(true);
+        eventBus.publish(new ActionDataAvailableEvent(event.getAction(), event.getClazz()));
     }
 
 }

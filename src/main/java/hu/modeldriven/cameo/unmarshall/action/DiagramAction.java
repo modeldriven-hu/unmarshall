@@ -17,8 +17,17 @@ import java.awt.event.ActionEvent;
 
 public class DiagramAction extends DefaultDiagramAction {
 
+    private final EventBus eventBus;
+    private final UseCase[] initialUseCases;
+
     public DiagramAction(String id, String name) {
         super(id, name, null, null);
+
+        this.eventBus = new EventBus();
+
+        this.initialUseCases = new UseCase[]{
+                new ActionSelectedUseCase(eventBus)
+        };
 
         var url = getClass().getResource("/icon.png");
         setSmallIcon(new ScalableImageIcon(url));
@@ -26,17 +35,6 @@ public class DiagramAction extends DefaultDiagramAction {
 
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
-
-        EventBus eventBus = new EventBus();
-
-        var initialUseCases = new UseCase[]{
-                new ActionSelectedUseCase()
-        };
-
-        for (var useCase : initialUseCases) {
-            useCase.register(eventBus);
-        }
-
         var presentationElements = getSelected();
 
         if (presentationElements != null && presentationElements.size() == 1) {
