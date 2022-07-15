@@ -4,6 +4,7 @@ import hu.modeldriven.cameo.unmarshall.event.CloseDialogRequestedEvent;
 import hu.modeldriven.core.eventbus.EventBus;
 import hu.modeldriven.core.usecase.UseCase;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 
 public class UnmarshallPanel extends BaseUnmarshallPanel{
@@ -24,6 +25,22 @@ public class UnmarshallPanel extends BaseUnmarshallPanel{
     }
 
     private void updateComponents(){
+
+        var pinTypeModel = new DefaultComboBoxModel<String>();
+        pinTypeModel.addElement("Input");
+        pinTypeModel.addElement("Output");
+
+        this.pinTypeCombobox.setModel(pinTypeModel);
+        this.pinTypeCombobox.setSelectedIndex(0);
+
+        var orientationModel = new DefaultComboBoxModel<String>();
+        orientationModel.addElement("Top");
+        orientationModel.addElement("Left");
+        orientationModel.addElement("Bottom");
+        orientationModel.addElement("Right");
+        this.orientationComboBox.setModel(orientationModel);
+        this.orientationComboBox.setSelectedIndex(0);
+        
         this.cancelButton.addActionListener(this::closeDialogCommand);
     }
 
