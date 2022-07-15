@@ -4,7 +4,7 @@ public class PropertyRecord {
 
     private final String name;
 
-    public PropertyRecord(String name){
+    public PropertyRecord(String name) {
         this.name = name;
     }
 

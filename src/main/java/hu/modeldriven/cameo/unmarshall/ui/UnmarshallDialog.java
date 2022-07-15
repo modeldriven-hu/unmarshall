@@ -1,6 +1,5 @@
 package hu.modeldriven.cameo.unmarshall.ui;
 
-import hu.modeldriven.cameo.unmarshall.event.ActionDataAvailableEvent;
 import hu.modeldriven.cameo.unmarshall.event.CloseDialogRequestedEvent;
 import hu.modeldriven.core.eventbus.EventBus;
 

@@ -7,12 +7,17 @@ import hu.modeldriven.core.usecase.UseCase;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Vector;
 
 public class UnmarshallPanel extends BaseUnmarshallPanel {
+
+    enum SelectionState {SELECT_ALL, DESELECT_All}
+
+    private SelectionState selectionState = SelectionState.SELECT_ALL;
 
     private final EventBus eventBus;
     private final UseCase[] useCases;
@@ -46,13 +51,16 @@ public class UnmarshallPanel extends BaseUnmarshallPanel {
         this.orientationComboBox.setModel(orientationModel);
         this.orientationComboBox.setSelectedIndex(0);
 
+        this.propertiesTable.setGridColor(new Color(240, 240, 240));
+
+        this.selectDeselectButton.addActionListener(this::selectDeselectCommand);
         this.cancelButton.addActionListener(this::closeDialogCommand);
     }
 
     public void setPropertyRecords(List<PropertyRecord> records) {
         SwingUtilities.invokeLater(() -> {
 
-            var columnNames = new Vector<>(Arrays.asList(new String[]{"Selection", "Name"}));
+            var columnNames = new Vector<>(Arrays.asList(new String[]{"Selection", "Property name"}));
 
             Vector<Vector> rows = new Vector<>();
 
@@ -77,8 +85,28 @@ public class UnmarshallPanel extends BaseUnmarshallPanel {
             };
 
             propertiesTable.setModel(model);
+
+            var column = propertiesTable.getColumnModel().getColumn(0);
+
+            column.setMinWidth(100);
+            column.setMaxWidth(100);
+            column.setPreferredWidth(100);
+
+            propertiesTable.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
         });
 
+    }
+
+    private void selectDeselectCommand(ActionEvent e) {
+
+        var model = (DefaultTableModel) propertiesTable.getModel();
+
+        for (var i = 0; i < model.getRowCount(); i++) {
+            model.setValueAt(selectionState == SelectionState.SELECT_ALL, i, 0);
+        }
+
+        // invert selection state
+        this.selectionState = this.selectionState == SelectionState.SELECT_ALL ? SelectionState.DESELECT_All : SelectionState.SELECT_ALL;
     }
 
     private void closeDialogCommand(ActionEvent e) {

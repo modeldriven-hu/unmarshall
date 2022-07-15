@@ -18,6 +18,8 @@ public class ActionDataAvailableEvent implements Event {
         return action;
     }
 
-    public Class getClazz() { return clazz; }
+    public Class getClazz() {
+        return clazz;
+    }
 
 }

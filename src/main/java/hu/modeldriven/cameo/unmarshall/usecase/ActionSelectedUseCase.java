@@ -1,6 +1,5 @@
 package hu.modeldriven.cameo.unmarshall.usecase;
 
-import com.nomagic.magicdraw.core.Application;
 import com.nomagic.magicdraw.ui.dialogs.MDDialogParentProvider;
 import hu.modeldriven.cameo.unmarshall.event.ActionDataAvailableEvent;
 import hu.modeldriven.cameo.unmarshall.event.ActionSelectedEvent;

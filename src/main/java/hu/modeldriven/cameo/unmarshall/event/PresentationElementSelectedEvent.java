@@ -8,11 +8,11 @@ public class PresentationElementSelectedEvent implements Event {
 
     private final PresentationElement presentationElement;
 
-    public PresentationElementSelectedEvent(PresentationElement presentationElement){
+    public PresentationElementSelectedEvent(PresentationElement presentationElement) {
         this.presentationElement = presentationElement;
     }
 
-    public Element getElement(){
+    public Element getElement() {
         return presentationElement.getElement();
     }
 }

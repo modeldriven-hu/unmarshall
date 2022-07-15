@@ -16,7 +16,7 @@ public class CreateSelectionFromInputPinUseCase extends AbstractUseCase {
         eventBus.subscribe(PresentationElementSelectedEvent.class, this::onDiagramItemSelected);
     }
 
-    public void onDiagramItemSelected(PresentationElementSelectedEvent event){
+    public void onDiagramItemSelected(PresentationElementSelectedEvent event) {
         var element = event.getElement();
 
         if (element instanceof InputPin && element.getOwner() instanceof Action) {

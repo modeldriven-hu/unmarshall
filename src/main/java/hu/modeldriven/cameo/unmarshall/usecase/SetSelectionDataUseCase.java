@@ -23,8 +23,8 @@ public class SetSelectionDataUseCase extends AbstractUseCase {
 
         var propertyRecords = properties
                 .stream()
-                .map( p -> p.getName())
-                .map( name -> new PropertyRecord(name))
+                .map(p -> p.getName())
+                .map(name -> new PropertyRecord(name))
                 .collect(Collectors.toList());
 
         this.panel.setPropertyRecords(propertyRecords);

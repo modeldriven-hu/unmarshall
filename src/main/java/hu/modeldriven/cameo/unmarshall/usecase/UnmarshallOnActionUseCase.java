@@ -19,7 +19,7 @@ public class UnmarshallOnActionUseCase extends AbstractUseCase {
         // FIXME add second action
     }
 
-    private void onDataAvailable(ActionDataAvailableEvent event){
+    private void onDataAvailable(ActionDataAvailableEvent event) {
         this.action = event.getAction();
         this.properties = event.getClazz().getOwnedAttribute();
     }
