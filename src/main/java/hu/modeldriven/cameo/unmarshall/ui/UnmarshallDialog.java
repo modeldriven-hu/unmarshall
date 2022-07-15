@@ -13,8 +13,9 @@ public class UnmarshallDialog extends JDialog {
 
         eventBus.subscribe(CloseDialogRequestedEvent.class, this::closeDialogRequested);
 
-        //this.setContentPane(new UnmarshallPanel(eventBus));
+        this.setContentPane(new UnmarshallPanel(eventBus));
         this.pack();
+        this.setDefaultCloseOperation(JDialog.HIDE_ON_CLOSE);
     }
 
     private void closeDialogRequested(CloseDialogRequestedEvent event) {
