@@ -3,15 +3,14 @@ package hu.modeldriven.cameo.unmarshall.usecase;
 import com.nomagic.magicdraw.core.Application;
 import com.nomagic.magicdraw.core.Project;
 import com.nomagic.magicdraw.openapi.uml.SessionManager;
-import com.nomagic.magicdraw.uml.symbols.shapes.PinView;
 import com.nomagic.uml2.ext.magicdraw.actions.mdbasicactions.Action;
 import com.nomagic.uml2.ext.magicdraw.actions.mdbasicactions.Pin;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Property;
 import hu.modeldriven.cameo.unmarshall.common.Orientation;
 import hu.modeldriven.cameo.unmarshall.common.PinType;
 import hu.modeldriven.cameo.unmarshall.common.PresentationAction;
-import hu.modeldriven.cameo.unmarshall.common.PresentationElementHelper;
 import hu.modeldriven.cameo.unmarshall.event.ActionDataAvailableEvent;
+import hu.modeldriven.cameo.unmarshall.event.PinsUnmarshalledEvent;
 import hu.modeldriven.cameo.unmarshall.event.UnmarshallRequestedEvent;
 import hu.modeldriven.core.eventbus.EventBus;
 import hu.modeldriven.core.usecase.AbstractUseCase;
@@ -35,12 +34,9 @@ public class UnmarshallOnActionUseCase extends AbstractUseCase {
     }
 
     private void onUnmarshallRequested(UnmarshallRequestedEvent event) {
-        var project = Application.getInstance().getProject();
-        createPins(project, event);
-        showPinsTypeAndName(project, event);
-    }
 
-    private void createPins(Project project, UnmarshallRequestedEvent event) {
+        var project = Application.getInstance().getProject();
+
         try {
             SessionManager.getInstance().createSession(project, "Adding pins to action");
 
@@ -53,10 +49,14 @@ public class UnmarshallOnActionUseCase extends AbstractUseCase {
                             p));
 
             SessionManager.getInstance().closeSession(project);
+
+            eventBus.publish(new PinsUnmarshalledEvent(event.getProperties()));
+
         } catch (Exception e) {
             SessionManager.getInstance().cancelSession(project);
         }
     }
+
     private void createProperty(Project project, Action action, Orientation orientation, PinType pinType, Property property) {
         if (pinType == PinType.Input) {
             var pin = project.getElementsFactory().createInputPinInstance();
@@ -74,27 +74,6 @@ public class UnmarshallOnActionUseCase extends AbstractUseCase {
         pin.setType(property.getType());
         pin.setUpperValue(property.getUpperValue());
         pin.setLowerValue(property.getLowerValue());
-    }
-
-    private void showPinsTypeAndName(Project project, UnmarshallRequestedEvent event) {
-        try {
-            SessionManager.getInstance().createSession(project, "Displaying pin name and type");
-
-            for (var presentationElement : action.getPresentationElement().getPresentationElements()) {
-                if (presentationElement instanceof PinView) {
-                    var pinView = (PinView) presentationElement;
-
-                    if (event.getProperties().contains(pinView.getElement().getName())) {
-                        PresentationElementHelper.showNameAndType(presentationElement);
-                    }
-
-                }
-            }
-
-            SessionManager.getInstance().closeSession(project);
-        } catch (Exception e) {
-            SessionManager.getInstance().cancelSession(project);
-        }
     }
 
 }

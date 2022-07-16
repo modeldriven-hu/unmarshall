@@ -3,10 +3,7 @@ package hu.modeldriven.cameo.unmarshall.action;
 import com.nomagic.magicdraw.ui.actions.DefaultDiagramAction;
 import com.nomagic.ui.ScalableImageIcon;
 import hu.modeldriven.cameo.unmarshall.event.PresentationElementSelectedEvent;
-import hu.modeldriven.cameo.unmarshall.usecase.ActionSelectedUseCase;
-import hu.modeldriven.cameo.unmarshall.usecase.CreateSelectionFromActionUseCase;
-import hu.modeldriven.cameo.unmarshall.usecase.CreateSelectionFromInputPinUseCase;
-import hu.modeldriven.cameo.unmarshall.usecase.UnmarshallOnActionUseCase;
+import hu.modeldriven.cameo.unmarshall.usecase.*;
 import hu.modeldriven.core.eventbus.EventBus;
 import hu.modeldriven.core.usecase.UseCase;
 
@@ -26,7 +23,8 @@ public class DiagramAction extends DefaultDiagramAction {
                 new ActionSelectedUseCase(eventBus),
                 new CreateSelectionFromActionUseCase(eventBus),
                 new CreateSelectionFromInputPinUseCase(eventBus),
-                new UnmarshallOnActionUseCase(eventBus)
+                new UnmarshallOnActionUseCase(eventBus),
+                new DisplayNameAndTypeUseCase(eventBus)
         };
 
         var url = getClass().getResource("/icon.png");
