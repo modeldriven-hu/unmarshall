@@ -1,7 +1,5 @@
 package hu.modeldriven.cameo.unmarshall.event;
 
-import com.nomagic.magicdraw.uml.symbols.PresentationElement;
-import com.nomagic.uml2.ext.magicdraw.actions.mdbasicactions.Action;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Class;
 import hu.modeldriven.cameo.unmarshall.common.PresentationAction;
 import hu.modeldriven.core.eventbus.Event;

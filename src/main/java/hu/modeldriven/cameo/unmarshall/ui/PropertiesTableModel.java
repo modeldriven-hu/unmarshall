@@ -12,8 +12,8 @@ public class PropertiesTableModel extends DefaultTableModel {
 
     private SelectionState selectionState = SelectionState.SELECT_ALL;
 
-    public static PropertiesTableModel fromRecords(List<PropertyRecord> records){
-        var columnNames = new Vector<>(Arrays.asList(new String[]{"Selection", "Property name"}));
+    public static PropertiesTableModel fromRecords(List<PropertyRecord> records) {
+        var columnNames = new Vector<>(Arrays.asList("Selection", "Property name"));
 
         Vector<Vector> rows = new Vector<>();
 

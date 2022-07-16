@@ -3,7 +3,6 @@ package hu.modeldriven.cameo.unmarshall.usecase;
 import com.nomagic.magicdraw.core.Application;
 import com.nomagic.magicdraw.openapi.uml.SessionManager;
 import com.nomagic.magicdraw.uml.symbols.shapes.PinView;
-import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Property;
 import hu.modeldriven.cameo.unmarshall.common.PresentationAction;
 import hu.modeldriven.cameo.unmarshall.common.PresentationElementHelper;
 import hu.modeldriven.cameo.unmarshall.event.ActionDataAvailableEvent;
@@ -12,10 +11,8 @@ import hu.modeldriven.cameo.unmarshall.event.PinsUnmarshalledEvent;
 import hu.modeldriven.core.eventbus.EventBus;
 import hu.modeldriven.core.usecase.AbstractUseCase;
 
-import java.util.List;
-
 public class DisplayNameAndTypeUseCase extends AbstractUseCase {
-    private List<Property> properties;
+
     private PresentationAction action;
 
     public DisplayNameAndTypeUseCase(EventBus eventBus) {
@@ -26,7 +23,6 @@ public class DisplayNameAndTypeUseCase extends AbstractUseCase {
 
     private void onDataAvailable(ActionDataAvailableEvent event) {
         this.action = event.getAction();
-        this.properties = event.getClazz().getOwnedAttribute();
     }
 
     private void onPinsUnmarshalled(PinsUnmarshalledEvent event) {

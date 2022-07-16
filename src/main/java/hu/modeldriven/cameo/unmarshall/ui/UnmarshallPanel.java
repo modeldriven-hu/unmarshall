@@ -11,6 +11,7 @@ import hu.modeldriven.core.usecase.UseCase;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.util.EnumSet;
 import java.util.List;
 
 public class UnmarshallPanel extends BaseUnmarshallPanel {
@@ -31,32 +32,23 @@ public class UnmarshallPanel extends BaseUnmarshallPanel {
     }
 
     private void updateComponents() {
-
-        // FIXME feel likes a code duplication, refactor later
-
-        var pinTypeModel = new DefaultComboBoxModel<PinType>();
-
-        for (var pinType : PinType.values()) {
-            pinTypeModel.addElement(pinType);
-        }
-
-        this.pinTypeCombobox.setModel(pinTypeModel);
-        this.pinTypeCombobox.setSelectedIndex(0);
-
-        var orientationModel = new DefaultComboBoxModel<Orientation>();
-
-        for (var orientation : Orientation.values()) {
-            orientationModel.addElement(orientation);
-        }
-
-        this.orientationComboBox.setModel(orientationModel);
-        this.orientationComboBox.setSelectedIndex(0);
+        calculateComboboxData(pinTypeCombobox, PinType.class);
+        calculateComboboxData(orientationComboBox, Orientation.class);
 
         this.propertiesTable.setGridColor(new Color(240, 240, 240));
 
         this.selectDeselectButton.addActionListener(this::onSelectDeselect);
         this.unmarshallButton.addActionListener(this::onUnmarshall);
         this.cancelButton.addActionListener(this::onCloseDialog);
+    }
+
+    private <E extends Enum<E>> void calculateComboboxData(JComboBox comboBox, Class<E> clazz) {
+        var model = new DefaultComboBoxModel<E>();
+
+        EnumSet.allOf(clazz).forEach(model::addElement);
+
+        comboBox.setModel(model);
+        comboBox.setSelectedIndex(0);
     }
 
     public void setPropertyRecords(List<PropertyRecord> records) {

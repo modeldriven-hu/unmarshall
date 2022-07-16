@@ -8,9 +8,9 @@ public class PresentationAction {
     private final PresentationElement presentationElement;
     private final Action action;
 
-    public PresentationAction(PresentationElement presentationElement){
+    public PresentationAction(PresentationElement presentationElement) {
         this.presentationElement = presentationElement;
-        this.action = (Action)presentationElement.getElement();
+        this.action = (Action) presentationElement.getElement();
     }
 
     public PresentationElement getPresentationElement() {

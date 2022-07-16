@@ -21,7 +21,7 @@ public class UnmarshallDialog extends JDialog {
         this.pack();
 
         this.setLocationRelativeTo(parent);
-        this.setDefaultCloseOperation(JDialog.HIDE_ON_CLOSE);
+        this.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
     }
 
     private void closeDialogRequested(CloseDialogRequestedEvent event) {

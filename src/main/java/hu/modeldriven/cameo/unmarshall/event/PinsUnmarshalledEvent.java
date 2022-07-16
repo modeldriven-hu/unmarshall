@@ -8,7 +8,7 @@ public class PinsUnmarshalledEvent implements Event {
 
     private final List<String> properties;
 
-    public PinsUnmarshalledEvent(List<String> properties){
+    public PinsUnmarshalledEvent(List<String> properties) {
         this.properties = properties;
     }
 

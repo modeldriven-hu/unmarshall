@@ -30,7 +30,7 @@ public class CreateSelectionFromActionUseCase extends AbstractUseCase {
         }
     }
 
-    private boolean isApplicable(PresentationElementSelectedEvent event){
+    private boolean isApplicable(PresentationElementSelectedEvent event) {
         return event.getPresentationElement().getElement() instanceof Action;
     }
 

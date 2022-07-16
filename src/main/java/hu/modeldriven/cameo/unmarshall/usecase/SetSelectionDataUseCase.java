@@ -1,5 +1,6 @@
 package hu.modeldriven.cameo.unmarshall.usecase;
 
+import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.NamedElement;
 import hu.modeldriven.cameo.unmarshall.event.ActionDataAvailableEvent;
 import hu.modeldriven.cameo.unmarshall.ui.PropertyRecord;
 import hu.modeldriven.cameo.unmarshall.ui.UnmarshallPanel;
@@ -23,7 +24,7 @@ public class SetSelectionDataUseCase extends AbstractUseCase {
 
         var propertyRecords = properties
                 .stream()
-                .map(p -> p.getName())
+                .map(NamedElement::getName)
                 .map(name -> new PropertyRecord(name))
                 .collect(Collectors.toList());
 
