@@ -6,6 +6,7 @@ import hu.modeldriven.cameo.unmarshall.event.PresentationElementSelectedEvent;
 import hu.modeldriven.cameo.unmarshall.usecase.ActionSelectedUseCase;
 import hu.modeldriven.cameo.unmarshall.usecase.CreateSelectionFromActionUseCase;
 import hu.modeldriven.cameo.unmarshall.usecase.CreateSelectionFromInputPinUseCase;
+import hu.modeldriven.cameo.unmarshall.usecase.UnmarshallOnActionUseCase;
 import hu.modeldriven.core.eventbus.EventBus;
 import hu.modeldriven.core.usecase.UseCase;
 
@@ -24,7 +25,8 @@ public class DiagramAction extends DefaultDiagramAction {
         this.initialUseCases = new UseCase[]{
                 new ActionSelectedUseCase(eventBus),
                 new CreateSelectionFromActionUseCase(eventBus),
-                new CreateSelectionFromInputPinUseCase(eventBus)
+                new CreateSelectionFromInputPinUseCase(eventBus),
+                new UnmarshallOnActionUseCase(eventBus)
         };
 
         var url = getClass().getResource("/icon.png");
