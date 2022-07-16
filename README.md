@@ -7,4 +7,8 @@ A common situation is during modeling to unmarshall a block's properties as inpu
 
 The plugin allows you to select the required properties and add create the corresponding input or output pins. 
 
-![image](https://user-images.githubusercontent.com/8182138/179367613-0291a72d-5c86-4927-ab16-4c101e133068.png)
+
+## Example 
+
+![image](https://user-images.githubusercontent.com/8182138/179367654-1a7b9750-8603-4420-94fa-8796d797bef6.png)
+
