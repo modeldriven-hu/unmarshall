@@ -1,0 +1,25 @@
+digraph G {
+
+  node [shape=box, style=filled, fillcolor="#CCFFCC"]; PresentationElementSelectedEvent; ActionSelectedEvent; ActionDataAvailableEvent; UnmarshallRequestedEvent; PinsUnmarshalledEvent; CloseDialogRequestedEvent;
+  node [shape=hexagon, style=filled, fillcolor="#AA55AA"]; "Populate data to UI", "Close dialog"
+  node [shape=oval, style=filled, fillcolor="#CCCCFF"]; "Click on menu", "Press unmarshall button"
+  node [shape=oval, style=filled, fillcolor="#FFFFCC"]; CreateSelectionFromActionUseCase;
+
+  "Click on menu"-> PresentationElementSelectedEvent
+  PresentationElementSelectedEvent -> CreateSelectionFromActionUseCase
+  PresentationElementSelectedEvent -> CreateSelectionFromInputPinUseCase
+  CreateSelectionFromActionUseCase -> ActionSelectedEvent
+  CreateSelectionFromInputPinUseCase -> ActionSelectedEvent
+  ActionSelectedEvent -> ActionSelectedUseCase
+  ActionSelectedUseCase -> ActionDataAvailableEvent
+  ActionDataAvailableEvent -> DisplayNameAndTypeUseCase
+  ActionDataAvailableEvent -> SetSelectionDataUseCase
+  SetSelectionDataUseCase -> "Populate data to UI"
+  ActionDataAvailableEvent -> UnmarshallOnActionUseCase
+  "Press unmarshall button" -> UnmarshallRequestedEvent
+  UnmarshallRequestedEvent -> UnmarshallOnActionUseCase
+  UnmarshallOnActionUseCase -> PinsUnmarshalledEvent
+  PinsUnmarshalledEvent -> DisplayNameAndTypeUseCase
+  DisplayNameAndTypeUseCase -> CloseDialogRequestedEvent
+  CloseDialogRequestedEvent -> "Close dialog"
+}
